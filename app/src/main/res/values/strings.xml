@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">PI - 4 Sem</string>
+    <string name="email">Email</string>
+    <string name="senha">Senha</string>
+    <string name="senac_logo">Senac logo</string>
+    <string name="login">Login</string>
+    <string name="title_activity_tab">TabActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+</resources>

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "891208074297",
+    "firebase_url": "https://pi-4sem.firebaseio.com",
+    "project_id": "pi-4sem",
+    "storage_bucket": "pi-4sem.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:891208074297:android:dfc6b8c4b56d646f",
+        "android_client_info": {
+          "package_name": "com.example.leandro.pi_4sem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "891208074297-ahcn9aqf72ke7qpb9lrqaovoug5543mr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.leandro.pi_4sem",
+            "certificate_hash": "dc1106a3b201e0e6aedc97e4a8e46686d1dadc96"
+          }
+        },
+        {
+          "client_id": "891208074297-g6ortr3culofi93f2dgn3qkqk4b6bt9j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDH3n8dy8d8EgkdqLND84K9UQXGj_z2EHg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "891208074297-g6ortr3culofi93f2dgn3qkqk4b6bt9j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
