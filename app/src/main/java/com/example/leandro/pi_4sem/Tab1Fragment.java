@@ -2,6 +2,7 @@ package com.example.leandro.pi_4sem;
 
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
@@ -64,6 +66,19 @@ public class Tab1Fragment extends Fragment {
 
         graph2.getGridLabelRenderer().setHumanRounding(false);
 
+        graph2.getViewport().setScrollableY(true);
+
+        graph2.getGridLabelRenderer().setGridColor(Color.BLACK);
+        graph2.getGridLabelRenderer().setHorizontalLabelsColor(Color.BLACK);
+        graph2.getGridLabelRenderer().setVerticalLabelsColor(Color.BLACK);
+
+        graph2.getViewport().setBackgroundColor(Color.argb(255, 222, 222, 222));
+        graph2.getViewport().setDrawBorder(true);
+        graph2.getViewport().setBorderColor(Color.BLUE);
+
+        mSeries2.setColor(Color.RED);
+
+
         return rootView;
     }
 
@@ -93,6 +108,6 @@ public class Tab1Fragment extends Fragment {
     double mLastRandom = 2;
     Random mRand = new Random();
     private double getRandom() {
-        return mLastRandom += mRand.nextDouble()*0.50 - 0.24;
+        return mLastRandom += mRand.nextDouble()*0.50 - 0.26;
     }
 }

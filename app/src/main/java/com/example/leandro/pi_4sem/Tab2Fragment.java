@@ -1,6 +1,7 @@
 package com.example.leandro.pi_4sem;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.ValueDependentColor;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
@@ -34,7 +36,7 @@ public class Tab2Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.tab_grafico1, container, false);
+        View rootView = inflater.inflate(R.layout.tab_grafico2, container, false);
         menor = rootView.findViewById(R.id.textMenor);
         maior = rootView.findViewById(R.id.textMaior);
 
@@ -57,6 +59,16 @@ public class Tab2Fragment extends Fragment {
         graph2.getGridLabelRenderer().setNumVerticalLabels(5);
 
         graph2.getGridLabelRenderer().setHumanRounding(false);
+
+        graph2.getViewport().setScrollableY(true);
+
+        mSeries2.setValueDependentColor(new ValueDependentColor<DataPoint>() {
+            @Override
+            public int get(DataPoint data) {
+                return Color.rgb((int) data.getX()*255/4, (int) Math.abs(data.getY()*255/6), 100);
+            }
+        });
+
 
         return rootView;
     }
