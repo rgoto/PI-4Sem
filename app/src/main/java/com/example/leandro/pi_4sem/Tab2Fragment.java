@@ -10,11 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.text.NumberFormat;
 import java.util.Random;
 
 /**
@@ -42,6 +44,19 @@ public class Tab2Fragment extends Fragment {
         graph2.getViewport().setXAxisBoundsManual(true);
         graph2.getViewport().setMinX(0);
         graph2.getViewport().setMaxX(40);
+
+        graph2.getViewport().setYAxisBoundsManual(true);
+        graph2.getViewport().setMinY(0);
+        graph2.getViewport().setMaxY(5);
+
+        NumberFormat nf = NumberFormat.getInstance();
+        nf.setMinimumFractionDigits(2);
+        nf.setMinimumIntegerDigits(1);
+
+        graph2.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter(nf, nf));
+        graph2.getGridLabelRenderer().setNumVerticalLabels(5);
+
+        graph2.getGridLabelRenderer().setHumanRounding(false);
 
         return rootView;
     }

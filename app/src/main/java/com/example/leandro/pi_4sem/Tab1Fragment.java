@@ -13,11 +13,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -52,6 +54,15 @@ public class Tab1Fragment extends Fragment {
         graph2.getViewport().setYAxisBoundsManual(true);
         graph2.getViewport().setMinY(0);
         graph2.getViewport().setMaxY(5);
+
+        NumberFormat nf = NumberFormat.getInstance();
+        nf.setMinimumFractionDigits(2);
+        nf.setMinimumIntegerDigits(1);
+
+        graph2.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter(nf, nf));
+        graph2.getGridLabelRenderer().setNumVerticalLabels(5);
+
+        graph2.getGridLabelRenderer().setHumanRounding(false);
 
         return rootView;
     }
