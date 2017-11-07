@@ -55,6 +55,33 @@
                 android:paddingTop="5dp" />
         </TableRow>
 
+        <TableRow
+            android:layout_width="70dp"
+            android:layout_height="125dp">
+
+            <Switch
+                android:id="@+id/switch5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:gravity="center_horizontal"
+                android:paddingBottom="10dp"
+                android:paddingEnd="15dp"
+                android:paddingTop="85dp"
+                android:text="Lampada" />
+
+            <TextView
+                android:id="@+id/textLigado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:paddingEnd="5dp"
+                android:paddingStart="5dp"
+                android:paddingTop="85dp"
+                android:text="ligada" />
+
+        </TableRow>
+
     </TableLayout>
 
 
