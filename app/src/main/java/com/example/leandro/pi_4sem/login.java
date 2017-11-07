@@ -50,6 +50,8 @@ public class login extends AppCompatActivity {
         passView = (EditText) findViewById(R.id.editPass);
         loginBtn = (Button) findViewById(R.id.btnLogin);
 
+        emailView.setText("adm@adm.com");
+        passView.setText("123456");
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override

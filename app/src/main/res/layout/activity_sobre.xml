@@ -8,14 +8,14 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="210dp"
-        android:layout_height="190dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="Uma breve descrição do nosso projeto, aprensentando os integrantes e a instituição"
+        android:text="Uma breve descrição do nosso projeto, aprensentando os integrantes e a instituição Desenvolvido por Diego M. Aguiar, Gustavo D Casettar, Leandro S. Campos e Rafael F. Goto "
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

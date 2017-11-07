@@ -65,6 +65,5 @@ public class logado extends AppCompatActivity {
         adpter.addFragment(new Tab2Fragment(), "Grafico Barra");
         viewPager.setAdapter(adpter);
     }
-
-
+    
 }
