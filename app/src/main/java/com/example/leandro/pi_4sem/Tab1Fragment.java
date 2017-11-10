@@ -10,11 +10,18 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
@@ -22,7 +29,13 @@ import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -42,13 +55,19 @@ public class Tab1Fragment extends Fragment {
     private GraphView graph2;
     private Switch sw;
     private TextView ligado;
+    private View rootView;
+    private int success;
+    private String nome;
+    private int id;
+    private Button button;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.tab_grafico1, container, false);
+        rootView = inflater.inflate(R.layout.tab_grafico1, container, false);
         menor = rootView.findViewById(R.id.textMenor);
         maior = rootView.findViewById(R.id.textMaior);
+        button = rootView.findViewById(R.id.button2);
 
         graph2 = rootView.findViewById(R.id.graph);
         mSeries2 = new LineGraphSeries<>();
@@ -63,7 +82,9 @@ public class Tab1Fragment extends Fragment {
 
         NumberFormat nf = NumberFormat.getInstance();
         nf.setMinimumFractionDigits(2);
+        nf.setMaximumFractionDigits(2);
         nf.setMinimumIntegerDigits(1);
+        nf.setMaximumIntegerDigits(2);
 
         graph2.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter(nf, nf));
         graph2.getGridLabelRenderer().setNumVerticalLabels(5);
@@ -98,38 +119,74 @@ public class Tab1Fragment extends Fragment {
             }
         });
 
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getDadosID(id);
+
+//                Handler handler = new Handler();
+//                handler.postDelayed(new Runnable() {
+//
+//                    @Override
+//                    public void run() {
+//
+//                    }
+//                },500);
+
+            }
+        });
 
         return rootView;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
 
-        mTimer2 = new Runnable() {
-            @Override
-            public void run() {
-                graph2LastXValue += 1d;
-                mSeries2.appendData(new DataPoint(graph2LastXValue, getRandom()), true, 40);
-                maior.setText("R$ " + mSeries2.getHighestValueY());
-                menor.setText("R$ " + mSeries2.getLowestValueY());
-                graph2.getViewport().setMinY(mSeries2.getLowestValueY());
-                graph2.getViewport().setMaxY(mSeries2.getHighestValueY()+1);
-                mHandler.postDelayed(this, 1000);
-            }
-        };
-        mHandler.postDelayed(mTimer2, 1500);
+    public void getArguments(Bundle bundle) {
+        nome = bundle.getString("nome");
+        id = bundle.getInt("id");
     }
 
-    @Override
-    public void onPause() {
-        mHandler.removeCallbacks(mTimer2);
-        super.onPause();
-    }
+    public void getDadosID(int id) {
+        RequestQueue queue = Volley.newRequestQueue(rootView.getContext());
+        String url = "http://pi4sem.rbbr.com.br/teste/getDadosUSER.php?id=1";
 
-    double mLastRandom = 2;
-    Random mRand = new Random();
-    private double getRandom() {
-        return mLastRandom += mRand.nextDouble()*0.50 - 0.26;
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            if (response.getInt("success") == 1) {
+                                success = 1;
+                                JSONArray object = response.getJSONArray("user");
+
+                                for (int i = 0; i < object.length(); i++) {
+                                    JSONObject c = object.getJSONObject(i);
+
+                                    Double gasto = c.getDouble("gasto");
+
+                                    mSeries2.appendData(new DataPoint(i, gasto), true, 40);
+                                }
+
+                            } else {
+                                Toast.makeText(rootView.getContext(),
+                                        response.getString("message").trim(),Toast.LENGTH_LONG).show();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO Auto-generated method stub
+                    }
+                });
+
+        // Access the RequestQueue through your singleton class.
+        queue.add(jsObjRequest);
+
     }
 }

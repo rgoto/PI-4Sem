@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
@@ -18,6 +19,8 @@ public class logado extends AppCompatActivity {
     private static final String TAG = "Main";
     private SectionPageAdpter mSectionPageAdpter;
     private ViewPager mViewPager;
+    private String nome;
+    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +34,6 @@ public class logado extends AppCompatActivity {
 
         TabLayout tableLayout = (TabLayout) findViewById(R.id.tabs);
         tableLayout.setupWithViewPager(mViewPager);
-
     }
 
     @Override
@@ -60,10 +62,20 @@ public class logado extends AppCompatActivity {
     }
 
     private void SetupViewPager (ViewPager viewPager) {
+        Tab1Fragment tab1 = new Tab1Fragment();
+        Tab2Fragment tab2 = new Tab2Fragment();
+
         SectionPageAdpter adpter = new SectionPageAdpter(getSupportFragmentManager());
-        adpter.addFragment(new Tab1Fragment(), "Grafico Linha");
-        adpter.addFragment(new Tab2Fragment(), "Grafico Barra");
+        adpter.addFragment(tab1, "Grafico Linha");
+        adpter.addFragment(tab2, "Grafico Barra");
         viewPager.setAdapter(adpter);
+        Bundle bundle = new Bundle();
+        bundle.putString("nome", nome);
+        bundle.putInt("id", id);
+
+        tab1.getArguments(bundle);
+        tab2.getArguments(bundle);
+
     }
     
 }

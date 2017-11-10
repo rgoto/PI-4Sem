@@ -122,4 +122,7 @@ public class Tab2Fragment extends Fragment {
     private double getRandom() {
         return mLastRandom += mRand.nextDouble()*0.5 - 0.25;
     }
+
+    public void getArguments(Bundle bundle) {
+    }
 }
